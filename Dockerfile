@@ -1,1 +1,3 @@
-FROM scatch
+FROM busybox
+
+CMD [ "echo 'hello world'" ]
