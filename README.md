@@ -10,3 +10,16 @@ Additionally with this switch I wanted to optimize the setup and also switch to 
 - it runs 2 processes in the same container as icecast2 is started as a service
 - there is very likely a ton of things brought in with the debian package of `liquidsoap` than actually needed
 - default passes haven't been changed yet – look at the [Dockerfile](Dockerfile) it is way too simple to sort these things out
+- the input and encoding are hardcoded in the liquidsoap call starting the process to the first subsystem of the first input
+
+## running the service
+Starting this thingy is actually as easy as calling:
+
+```
+$ docker run --name sonos_vinyl --rm -d -p 8000:8000 --device /dev/snd quay.io/deichten/sonos-vinyl-arm
+```
+
+Where the name is absolutely optional and I only added for readability. Afterwards you might open `http://<your-raspi-docker-host-address>:8000/` in your browser and start streaming the audio input. 
+
+## Pro Tip
+As this repo is setup to build a new container version via github actions I also run [containrrr/watchtower](https://github.com/containrrr/watchtower) to keep the version always up to date on my Raspi.
