@@ -3,6 +3,9 @@ name: Build X-Arch Docker image and Publish
 on:
   push:
     branches: [ main ]
+    paths-ignore: 
+      - README.md
+      - LICENSE
   pull_request:
     branches: [ main ]
 
