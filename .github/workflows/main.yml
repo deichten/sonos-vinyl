@@ -17,7 +17,7 @@ jobs:
       DOCKER_IMAGE: deichten/sonos-vinyl-arm
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      DOCKER_TARGET_PLATFORM: linux/arm/v7
+      DOCKER_TARGET_PLATFORM: linux/arm/v6,linux/arm/v7,linux/arm64
 
     steps:
       - name: Checkout code
