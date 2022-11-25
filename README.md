@@ -6,17 +6,18 @@ In my first try I was using a [Raspberry Pi Zero W](https://www.raspberrypi.org/
 
 Additionally with this switch I wanted to optimize the setup and also switch to a docker based setup. tl;dr: this actually works like a charm now but also has a couple of problems:
 
-- the container is rather huge as I based it on the `balenalib/raspberry-pi3-debian:buster-run` image
-- it runs 2 processes in the same container as icecast2 is started as a service
+- ~~ the container is rather huge as I based it on the `balenalib/raspberry-pi3-debian:buster-run` image ~~ 
+now the container is even bigger but in exchange build in a true multiarch way
+- it runs 2 processes in the same container as icecast2 is started as a service **UPDATE:** although not really clean this is a benefit given that the container is based on ``debian:11-slim`` as no additional linkage or networking needs to be established
 - there is very likely a ton of things brought in with the debian package of `liquidsoap` than actually needed
 - default passes haven't been changed yet – look at the [Dockerfile](Dockerfile) it is way too simple to sort these things out
 - the input and encoding are hardcoded in the liquidsoap call starting the process to the first subsystem of the first input
 
 ## running the service
-Starting this thingy is actually as easy as calling:
+Starting this thing is actually as easy as calling:
 
 ```
-$ docker run --name sonos_vinyl --rm -d -p 8000:8000 --device /dev/snd quay.io/deichten/sonos-vinyl-arm
+$ docker run --name sonos_vinyl --rm -d -p 8000:8000 --device /dev/snd docker.io/deichten/sonos-vinyl:latest
 ```
 
 Where the name is absolutely optional and I only added for readability. Afterwards you might open `http://<your-raspi-docker-host-address>:8000/` in your browser and start streaming the audio input. 
